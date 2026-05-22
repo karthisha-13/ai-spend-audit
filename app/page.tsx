@@ -7,22 +7,30 @@ export default function Home() {
   const [spend, setSpend] = useState("");
   const [users, setUsers] = useState("");
   const [useCase, setUseCase] = useState("");
+  const [result, setResult] = useState("");
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+ const handleSubmit = (e: any) => {
+  e.preventDefault();
 
-    const data = {
-      tool,
-      plan,
-      spend,
-      users,
-      useCase,
-    };
+  let message = "";
+  let savings = 0;
 
+  if (Number(spend) > 100) {
+    message = `⚠️ High spending detected on ${tool}. Consider downgrading your ${plan} plan.`;
+    savings = 30;
+  } else if (Number(spend) > 50) {
+    message = `⚠️ Moderate overspending on ${tool}. Try optimizing usage.`;
+    savings = 15;
+  } else {
+    message = `✅ Your spending on ${tool} is well optimized.`;
+  }
 
-    console.log("Form Data:", JSON.stringify(data, null, 2));
-    alert("Form submitted successfully!");
-  };
+  if (savings > 0) {
+    message += ` 💰 You could save around $${savings}/month.`;
+  }
+
+  setResult(message);
+};
 
   return (
     <main className="min-h-screen bg-black text-white flex items-center justify-center">
@@ -75,11 +83,16 @@ export default function Home() {
         />
 
         <button
-          type="submit"
-          className="w-full bg-white text-black py-2 rounded font-semibold"
+        type="submit"
+        className="w-full bg-white text-black py-2 rounded font-semibold"
         >
           Analyze Spend
-        </button>
+          </button>
+          {result && (
+            <div className="mt-6 p-4 bg-white/10 rounded-lg text-center text-lg font-medium border border-gray-700">
+              {result}
+              </div>
+            )}
       </form>
     </main>
   );
