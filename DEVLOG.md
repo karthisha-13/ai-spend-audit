@@ -123,3 +123,36 @@ How I solved blockers:
 Plan:
 - Improve UI and user experience
 - Add analytics dashboard and better result display
+
+
+
+
+
+## Day 5 — 2026-05-25
+
+Hours worked: 4
+
+What I did:
+- Enhanced audit logic with suggestions and savings calculation
+- Improved UI with better layout and styling
+- Added analytics dashboard (savings, spend level, efficiency)
+- Displayed dynamic results in structured format
+- Personalized UI by showing logged-in user name
+
+What I learned:
+- Improving user experience with visual feedback
+- Structuring output for better readability
+- Designing simple dashboard components
+- Enhancing product feel with UI improvements
+
+Blockers:
+- Making UI look clean and professional
+- Deciding how to present analytics clearly
+
+How I solved blockers:
+- Used card-based layout and simple dashboard design
+- Displayed key insights like savings and spend level
+
+Plan:
+- Add charts and advanced analytics
+- Improve documentation and product thinking
