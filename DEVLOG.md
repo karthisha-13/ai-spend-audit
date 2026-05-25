@@ -31,7 +31,7 @@ Plan:
 
 ## Day 2 — 2026-05-22
 
-Hours worked: 4
+Hours worked: 5
 
 What I did:
 - Designed and implemented the AI Spend Audit form UI
@@ -59,3 +59,34 @@ Plan for next day:
 - Implement audit logic to analyze user input
 - Display meaningful results based on spending patterns
 - Improve user experience with dynamic feedback
+
+
+
+
+
+
+
+## Day 3 — 2026-05-23
+
+Hours worked: 4
+
+What I did:
+- Implemented smart audit logic
+- Added conditions for high, medium, and low spending
+- Displayed dynamic results based on user input
+- Added estimated monthly savings
+
+What I learned:
+- Writing conditional logic for real-world problems
+- Improving user experience with dynamic feedback
+
+Blockers:
+- Deciding thresholds for spending levels
+
+How I solved blockers:
+- Used simple ranges (high, medium, low)
+- Tested different scenarios
+
+Plan:
+- Improve recommendations
+- Enhance UI for results
