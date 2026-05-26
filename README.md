@@ -66,3 +66,36 @@ AI Spend Audit allows users to:
 ---
 
 ## Example Output
+High spending on ChatGPT
+Suggestion: Downgrade plan
+Save $30/month
+
+
+---
+
+## Future Improvements
+
+- Add charts and analytics dashboard  
+- Store audit history  
+- Integrate backend (database)  
+- Implement secure authentication  
+- Add team-based insights  
+
+---
+
+## Author
+
+Pashihkanti Karthisha
+
+---
+
+## Final Note
+
+This project was developed as part of an internship assignment focusing on:
+
+- Frontend development  
+- Logic building  
+- Product thinking  
+- Documentation  
+
+---
