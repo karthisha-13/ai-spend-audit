@@ -85,7 +85,7 @@ Save $30/month
 
 ## Author
 
-Pashihkanti Karthisha
+Pashikanti Karthisha
 
 ---
 
