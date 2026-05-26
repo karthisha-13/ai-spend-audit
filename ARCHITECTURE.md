@@ -4,7 +4,7 @@ This project evolved over multiple days, improving from basic UI → logic → p
 
 ---
 
-## 🟢 Day 3 – Frontend Foundation
+##  Day 3 – Frontend Foundation
 
 ### 1. Frontend
 - Built using Next.js (App Router)
@@ -26,7 +26,7 @@ This project evolved over multiple days, improving from basic UI → logic → p
 
 ---
 
-## 🔵 Day 4 – Logic & Functionality
+##  Day 4 – Logic & Functionality
 
 ### 4. Routing & Navigation
 - useRouter from Next.js used
@@ -57,7 +57,7 @@ This project evolved over multiple days, improving from basic UI → logic → p
 
 ---
 
-## 🟣 Day 5 – UX & Product Layer
+##  Day 5 – UX & Product Layer
 
 ### 8. UI Improvements
 - Centered layout with card-based design
@@ -81,7 +81,7 @@ This project evolved over multiple days, improving from basic UI → logic → p
 
 ---
 
-## 🧠 Overall Architecture Summary
+##  Overall Architecture Summary
 
 - **Frontend:** Next.js (App Router)
 - **State:** React useState
@@ -92,7 +92,7 @@ This project evolved over multiple days, improving from basic UI → logic → p
 
 ---
 
-## 🚀 Future Improvements (Planned)
+##  Future Improvements (Planned)
 
 - Add charts for spending visualization
 - Store audit history
