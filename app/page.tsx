@@ -1,99 +1,116 @@
 "use client";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import "./styles.css";
 
 export default function Home() {
+  const router = useRouter();
+
+  const [username, setUsername] = useState("");
   const [tool, setTool] = useState("");
   const [plan, setPlan] = useState("");
   const [spend, setSpend] = useState("");
   const [users, setUsers] = useState("");
   const [useCase, setUseCase] = useState("");
-  const [result, setResult] = useState("");
 
- const handleSubmit = (e: any) => {
-  e.preventDefault();
+  const [message, setMessage] = useState("");
+  const [suggestion, setSuggestion] = useState("");
+  const [savings, setSavings] = useState(0);
+  const [level, setLevel] = useState("");
 
-  let message = "";
-  let savings = 0;
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user) router.push("/login");
+    else setUsername(user);
+  }, [router]);
 
-  if (Number(spend) > 100) {
-    message = `⚠️ High spending detected on ${tool}. Consider downgrading your ${plan} plan.`;
-    savings = 30;
-  } else if (Number(spend) > 50) {
-    message = `⚠️ Moderate overspending on ${tool}. Try optimizing usage.`;
-    savings = 15;
-  } else {
-    message = `✅ Your spending on ${tool} is well optimized.`;
-  }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if (savings > 0) {
-    message += ` 💰 You could save around $${savings}/month.`;
-  }
+    if (!tool || !plan || !spend || !users || !useCase) {
+      setMessage("Please fill all fields");
+      setSuggestion("");
+      setSavings(0);
+      setLevel("");
+      return;
+    }
 
-  setResult(message);
-};
+    const amount = Number(spend);
+
+    if (amount > 100) {
+      setMessage(`High spending detected on ${tool}`);
+      setSuggestion(`Downgrade ${plan} plan`);
+      setSavings(30);
+      setLevel("High");
+    } else if (amount > 50) {
+      setMessage(`Moderate spending detected on ${tool}`);
+      setSuggestion("Optimize usage");
+      setSavings(15);
+      setLevel("Medium");
+    } else {
+      setMessage(`Your spending on ${tool} is optimized`);
+      setSuggestion("No changes needed");
+      setSavings(0);
+      setLevel("Low");
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    router.push("/login");
+  };
 
   return (
-    <main className="min-h-screen bg-black text-white flex items-center justify-center">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-900 p-8 rounded-xl w-full max-w-md space-y-4"
-      >
-        <h1 className="text-2xl font-bold text-center">
-          AI Spend Audit
-        </h1>
+    <main className="page">
+      <button type="button" className="logout" onClick={logout}>
+        Logout
+      </button>
 
-        <input
-          type="text"
-          placeholder="Tool (ChatGPT, Claude...)"
-          className="w-full p-2 rounded bg-black border border-gray-700"
-          value={tool}
-          onChange={(e) => setTool(e.target.value)}
-        />
+      <section className="hero">
+        <span className="badge">AI Cost Optimizer</span>
+        <h1>Audit Your AI Spending Smarter</h1>
+        <p>Analyze your AI tool cost and get instant savings suggestions.</p>
+      </section>
 
-        <input
-          type="text"
-          placeholder="Plan (Free, Pro, Team)"
-          className="w-full p-2 rounded bg-black border border-gray-700"
-          value={plan}
-          onChange={(e) => setPlan(e.target.value)}
-        />
+      <section className="auditCard">
+        <h2>Welcome, {username}</h2>
+        <p className="subtitle">Enter your AI tool details</p>
 
-        <input
-          type="number"
-          placeholder="Monthly Spend ($)"
-          className="w-full p-2 rounded bg-black border border-gray-700"
-          value={spend}
-          onChange={(e) => setSpend(e.target.value)}
-        />
+        <form onSubmit={handleSubmit} className="form">
+          <input placeholder="Tool Name" value={tool} onChange={(e) => setTool(e.target.value)} />
+          <input placeholder="Plan" value={plan} onChange={(e) => setPlan(e.target.value)} />
+          <input type="number" placeholder="Monthly Spend ($)" value={spend} onChange={(e) => setSpend(e.target.value)} />
+          <input type="number" placeholder="Users" value={users} onChange={(e) => setUsers(e.target.value)} />
+          <input placeholder="Use Case" value={useCase} onChange={(e) => setUseCase(e.target.value)} />
 
-        <input
-          type="number"
-          placeholder="Number of Users"
-          className="w-full p-2 rounded bg-black border border-gray-700"
-          value={users}
-          onChange={(e) => setUsers(e.target.value)}
-        />
+          <button type="submit" className="analyzeBtn">Analyze Spend</button>
+        </form>
 
-        <input
-          type="text"
-          placeholder="Use Case"
-          className="w-full p-2 rounded bg-black border border-gray-700"
-          value={useCase}
-          onChange={(e) => setUseCase(e.target.value)}
-        />
+        {message && (
+          <div className="result">
+            <p>{message}</p>
+            {suggestion && <p>Suggestion: {suggestion}</p>}
+          </div>
+        )}
 
-        <button
-        type="submit"
-        className="w-full bg-white text-black py-2 rounded font-semibold"
-        >
-          Analyze Spend
-          </button>
-          {result && (
-            <div className="mt-6 p-4 bg-white/10 rounded-lg text-center text-lg font-medium border border-gray-700">
-              {result}
-              </div>
-            )}
-      </form>
+        {level && (
+          <div className="dashboard">
+            <div>
+              <h3>Savings</h3>
+              <p>${savings}/mo</p>
+            </div>
+            <div>
+              <h3>Level</h3>
+              <p>{level}</p>
+            </div>
+            <div>
+              <h3>Efficiency</h3>
+              <p>{Number(spend) > 50 ? "Needs Work" : "Good"}</p>
+            </div>
+          </div>
+        )}
+      </section>
     </main>
   );
 }
